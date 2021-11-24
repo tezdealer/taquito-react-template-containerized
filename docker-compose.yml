@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  app:
+    image: taquito-template
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        WORKDIR: ${WORKDIR}
+    entrypoint: /bin/sh ${WORKDIR}/start_server.sh
+    environment:
+      - WORKDIR=${WORKDIR}
+    ports:
+      - "3000:3000"
+    hostname: taquito
+    tty: true
+    volumes:
+      - ./tmp:/tmp
